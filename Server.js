@@ -19,7 +19,7 @@ db.connect((err) => {
 });
 app.post('/login', (req, res) => {
   const { user_id, password } = req.body;
-  const sql = 'SELECT * FROM users WHERE User_id = ? AND password = ?';
+  const sql = 'SELECT * FROM Customer_Data WHERE User_id = ? AND password = ?';
   db.query(sql, [user_id, password], (err, results) => {
     if (err) throw err;
     if (results.length > 0) {
@@ -27,6 +27,34 @@ app.post('/login', (req, res) => {
     } else {
       res.json({ success: false, message: '실패' });
     }
+  });
+});
+app.get('/data/user_id', (req, res) =>{
+  const sql = "SELECT User_id FROM Sensor_Data ORDER BY User_id DESC LIMIT 1"
+  db.query(sql, (err, results) => {
+    if(err) throw err;
+    res.json(results);
+  });
+});
+app.get('/data/tem-hum', (req, res) => {
+  const sql = "SELECT Tem_Hum_Data FROM Sensor_Data ORDER BY User_id DESC LIMIT 1";
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+app.get('/data/move', (req, res) => {
+  const sql = "SELECT Move_Data FROM Sensor_Data ORDER BY User_id DESC LIMIT 1";
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+app.get('/data/gas', (req, res) => {
+  const sql = "SELECT Gas_Data FROM Sensor_Data ORDER BY User_id DESC LIMIT 1";
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+    res.json(results);
   });
 });
 const PORT = 3001;

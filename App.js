@@ -26,7 +26,7 @@ function App() {
       <div>
         <h1>독거노인 모니터링 시스템</h1>
         <nav>
-          <Link to="/">홈</Link> | <Link to="/dashboard">대시보드</Link>
+          <Link to="/">홈</Link> | <Link to="/dashboard">대시보드</Link> <Link to ="/data">데이터</Link>
         </nav>
         <Routes>
           <Route path="/" element={<h2>홈 페이지</h2>} />
@@ -34,24 +34,24 @@ function App() {
         </Routes>
       </div>
       <div>
-      <h2>로그인</h2>
-      <form onSubmit={Login}>
-        <input
-          type="text"
-          placeholder="User_ID"
-          value={user_id}
-          onChange={(e) => setUser_id(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">로그인</button>
-      </form>
-      {message && <p>{message}</p>}
-    </div>
+        <h2>로그인</h2>
+        <form onSubmit={Login}>
+          <input
+            type="text"
+            placeholder="User_ID"
+            value={user_id}
+            onChange={(e) => setUser_id(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button type="submit">로그인</button>
+        </form>
+        {message && <p>{message}</p>}
+      </div>
     </Router>
   );
 }
