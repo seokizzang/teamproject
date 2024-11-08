@@ -17,7 +17,7 @@ function App() {
       setMessage(response.data.message);
     } catch (error) {
       console.error(error);
-      setMessage('An error occurred');
+      setMessage('문제 발생');
     }
   };
 
