@@ -8,16 +8,16 @@ function DataPage() {
     const [Gas_Data, setGasData] = useState([]);
 
     useEffect(() => {
-        axios.get('3.35.112.81:3001/data/user_id')
+        axios.get('13.124.233.190:3001/data/user_id')
             .then((response) => setUser_id(response.data))
             .catch((error) => console.error(error));
-        axios.get('3.35.112.81:3001/data/tem-hum')
+        axios.get('13.124.233.190:3001/data/tem-hum')
             .then((response) => setTemHumData(response.data))
             .catch((error) => console.error(error));
-        axios.get('3.35.112.81:3001/data/move')
+        axios.get('13.124.233.190:3001/data/move')
             .then((response) => setMoveData(response.data))
             .catch((error) => console.error(error));
-        axios.get('3.35.112.81:3001/data/gas')
+        axios.get('13.124.233.190:3001/data/gas')
             .then((response) => setGasData(response.data))
             .catch((error) => console.error(error));
     }, []);
