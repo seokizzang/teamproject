@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 const db = mysql.createConnection({
-  host: 'database1.chy2co2ssp0n.ap-northeast-2.rds.amazonaws.com',
+  host: 'database1.chy2co2ssp0n.ap-northeast-2.rds.amazonaws.com:3306',
   user: 'admin',
   password: 'admin1111',
   database: 'database1'
