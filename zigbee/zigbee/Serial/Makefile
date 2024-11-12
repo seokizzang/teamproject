@@ -1,0 +1,2 @@
+COMPONENT = SendSerialAppC
+include $(MAKERULES)
