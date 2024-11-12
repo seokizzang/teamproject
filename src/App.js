@@ -1,12 +1,17 @@
-import React from 'react';
+// import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import axios from 'axios';
+import React, {useState} from 'react';
+import DataPage from './Data';
 
 function App() {
+  const [message, setMessage] = useState('');
   const [user_id, setUser_id] = useState('');
   const [password, setPassword] = useState('');
-
+  const handleMessageChange = (newMessage) =>{
+    setMessage(newMessage);
+  };
   const Login = async (event) => {
     event.preventDefault();
     try {
@@ -26,11 +31,12 @@ function App() {
       <div>
         <h1>독거노인 모니터링 시스템</h1>
         <nav>
-          <Link to="/">홈</Link> | <Link to="/dashboard">대시보드</Link> <Link to ="/data">데이터</Link>
+          <Link to="/">홈</Link> | <Link to="/dashboard">대시보드</Link> | <Link to ="/Data">데이터</Link>
         </nav>
         <Routes>
           <Route path="/" element={<h2>홈 페이지</h2>} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/Data" element={<DataPage />}/>
         </Routes>
       </div>
       <div>
