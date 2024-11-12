@@ -15,7 +15,7 @@ function App() {
   const Login = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('13.124.233.190:3001/login', {
+      const response = await axios.post('3.35.112.81:3001/login', {
         user_id: user_id,
         password: password,
       });

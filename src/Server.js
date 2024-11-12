@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 const db = mysql.createConnection({
-  host: 'database1.chy2co2ssp0n.ap-northeast-2.rds.amazonaws.com:3306',
+  host: 'database1.chy2co2ssp0n.ap-northeast-2.rds.amazonaws.com',
   user: 'admin',
   password: 'admin1111',
   database: 'database1'
@@ -19,7 +19,7 @@ db.connect((err) => {
 });
 app.post('/login', (req, res) => {
   const { user_id, password } = req.body;
-  const sql = 'SELECT * FROM Customer_Data WHERE User_id = ? AND password = ?';
+  const sql = 'SELECT * FROM Customer_data WHERE User_Id = ? AND password = ?';
   db.query(sql, [user_id, password], (err, results) => {
     if (err) throw err;
     if (results.length > 0) {
