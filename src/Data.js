@@ -7,6 +7,23 @@ function DataPage() {
     const [moveData, setMoveData] = useState([]);
     const [gasData, setGasData] = useState([]);
 
+    //css
+    const cardStyle = {
+        border: '1px solid #ccc',
+        borderRadius: '8px',
+        padding: '16px',
+        width: '300px',
+        backgroundColor: '#f9f9f9',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    };
+    
+    const dataItemStyle = {
+        marginBottom: '12px',
+        borderBottom: '1px solid #eee',
+        paddingBottom: '8px',
+    };    
+
+
     useEffect(() => {
         axios.get('http://3.35.112.81:3001/data/user_id')
             .then((response) => setUser_id(response.data))
@@ -26,60 +43,39 @@ function DataPage() {
     }, []);
 
     return (
-        <div>
-            <h2>온습도 데이터</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>온습도</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {temHumData.map((temHum) => (
-                        <tr key={temHum.User_id}>
-                            <td>{temHum.id}</td>
-                            <td>{temHum.Tem_Hum_Data}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            <h2>Move_Data</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>인체감지</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {moveData.map((move) => (
-                        <tr key={move.User_id}>
-                            <td>{move.User_id}</td>
-                            <td>{move.Move_Data}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            <h2>Gas_Data</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>가스</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {gasData.map((gas) => (
-                        <tr key={gas.User_id}>
-                            <td>{gas.User_id}</td>
-                            <td>{gas.Gas_Data}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+            {/* 온습도 데이터 카드 */}
+            <div style={cardStyle}>
+                <h2>온습도 데이터</h2>
+                {temHumData.map((temHum) => (
+                    <div key={temHum.User_id} style={dataItemStyle}>
+                        <p><strong>번호:</strong> {temHum.id}</p>
+                        <p><strong>온습도:</strong> {temHum.Tem_Hum_Data}</p>
+                    </div>
+                ))}
+            </div>
+    
+            {/* 이동 데이터 카드 */}
+            <div style={cardStyle}>
+                <h2>이동 데이터</h2>
+                {moveData.map((move) => (
+                    <div key={move.User_id} style={dataItemStyle}>
+                        <p><strong>번호:</strong> {move.User_id}</p>
+                        <p><strong>인체감지:</strong> {move.Move_Data}</p>
+                    </div>
+                ))}
+            </div>
+    
+            {/* 가스 검출 데이터 카드 */}
+            <div style={cardStyle}>
+                <h2>가스 검출</h2>
+                {gasData.map((gas) => (
+                    <div key={gas.User_id} style={dataItemStyle}>
+                        <p><strong>번호:</strong> {gas.User_id}</p>
+                        <p><strong>가스:</strong> {gas.Gas_Data}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

@@ -30,28 +30,28 @@ app.post('/login', (req, res) => {
   });
 });
 app.get('/data/user_id', (req, res) =>{
-  const sql = "SELECT User_id FROM Sensor_Data ORDER BY User_id DESC LIMIT 1"
+  const sql = "SELECT User_id FROM Sensor_Data ORDER BY User_id"
   db.query(sql, (err, results) => {
     if(err) throw err;
     res.json(results);
   });
 });
 app.get('/data/tem-hum', (req, res) => {
-  const sql = "SELECT Tem_Hum_Data FROM Sensor_Data ORDER BY User_id DESC LIMIT 1";
+  const sql = "SELECT Tem_Hum_Data FROM Sensor_Data ORDER BY User_id";
   db.query(sql, (err, results) => {
     if (err) throw err;
     res.json(results);
   });
 });
 app.get('/data/move', (req, res) => {
-  const sql = "SELECT Move_Data FROM Sensor_Data ORDER BY User_id DESC LIMIT 1";
+  const sql = "SELECT Move_Data FROM Sensor_Data ORDER BY User_id";
   db.query(sql, (err, results) => {
     if (err) throw err;
     res.json(results);
   });
 });
 app.get('/data/gas', (req, res) => {
-  const sql = "SELECT Gas_Data FROM Sensor_Data ORDER BY User_id DESC LIMIT 1";
+  const sql = "SELECT Gas_Data FROM Sensor_Data ORDER BY User_id";
   db.query(sql, (err, results) => {
     if (err) throw err;
     res.json(results);

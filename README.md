@@ -9,4 +9,6 @@ pm2 start Server.js
 cd ..
 npm start
 
-3.35.112.81:3000으로 접속
+RDS 접속 명령어
+mysql -h database1.chy2co2ssp0n.ap-northeast-2.rds.amazonaws.com -u admin -p database1
+
