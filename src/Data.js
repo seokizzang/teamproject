@@ -29,7 +29,11 @@ function DataPage() {
             .then((response) => setUser_id(response.data))
             .catch((error) => console.error(error));
 
-        axios.get('http://3.35.112.81:3001/data/tem-hum')
+        axios.get('http://3.35.112.81:3001/data/tem')
+            .then((response) => setTemHumData(response.data))
+            .catch((error) => console.error(error));
+
+        axios.get('http://3.35.112.81:3001/data/hum')
             .then((response) => setTemHumData(response.data))
             .catch((error) => console.error(error));
 
@@ -46,22 +50,31 @@ function DataPage() {
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
             {/* 온습도 데이터 카드 */}
             <div style={cardStyle}>
-                <h2>온습도 데이터</h2>
-                {temHumData.map((temHum) => (
-                    <div key={temHum.User_id} style={dataItemStyle}>
-                        <p><strong>번호:</strong> {temHum.id}</p>
-                        <p><strong>온습도:</strong> {temHum.Tem_Hum_Data}</p>
+                <h2>온도 데이터</h2>
+                {temHumData.map((tem) => (
+                    <div key={tem.User_id} style={dataItemStyle}>
+                        <p><strong>번호:</strong> {tem.user_id}</p>
+                        <p><strong>온습도:</strong> {tem.tem_data}</p>
                     </div>
                 ))}
             </div>
-    
+            {/* 습도 데이터 카드 */}
+            <div style={cardStyle}>
+                <h2>습도 데이터</h2>
+                {temHumData.map((hum) => (
+                    <div key={hum.user_id} style={dataItemStyle}>
+                        <p><strong>번호:</strong> {hum.user_id}</p>
+                        <p><strong>온습도:</strong> {hum.hum_data}</p>
+                    </div>
+                ))}
+            </div>
             {/* 이동 데이터 카드 */}
             <div style={cardStyle}>
                 <h2>이동 데이터</h2>
                 {moveData.map((move) => (
-                    <div key={move.User_id} style={dataItemStyle}>
-                        <p><strong>번호:</strong> {move.User_id}</p>
-                        <p><strong>인체감지:</strong> {move.Move_Data}</p>
+                    <div key={move.user_id} style={dataItemStyle}>
+                        <p><strong>번호:</strong> {move.user_id}</p>
+                        <p><strong>인체감지:</strong> {move.move_data}</p>
                     </div>
                 ))}
             </div>
@@ -70,14 +83,15 @@ function DataPage() {
             <div style={cardStyle}>
                 <h2>가스 검출</h2>
                 {gasData.map((gas) => (
-                    <div key={gas.User_id} style={dataItemStyle}>
-                        <p><strong>번호:</strong> {gas.User_id}</p>
-                        <p><strong>가스:</strong> {gas.Gas_Data}</p>
+                    <div key={gas.user_id} style={dataItemStyle}>
+                        <p><strong>번호:</strong> {gas.user_id}</p>
+                        <p><strong>가스:</strong> {gas.gas_data}</p>
                     </div>
                 ))}
             </div>
         </div>
     );
 }
+
 
 export default DataPage;

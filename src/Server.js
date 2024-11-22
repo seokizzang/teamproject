@@ -7,10 +7,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 const db = mysql.createConnection({
-  host: 'database1.chy2co2ssp0n.ap-northeast-2.rds.amazonaws.com',
-  user: 'admin',
-  password: 'admin1111',
-  database: 'database1'
+  host: '119.197.155.172',
+  user: 'zigbee_user',
+  password: '1234',
+  database: 'zigbee_db'
 });
 
 db.connect((err) => {
@@ -19,7 +19,7 @@ db.connect((err) => {
 });
 app.post('/login', (req, res) => {
   const { user_id, password } = req.body;
-  const sql = 'SELECT * FROM Customer_data WHERE User_Id = ? AND password = ?';
+  const sql = 'SELECT * FROM Customer_Data WHERE user_id = ? AND password = ?';
   db.query(sql, [user_id, password], (err, results) => {
     if (err) throw err;
     if (results.length > 0) {
@@ -29,29 +29,29 @@ app.post('/login', (req, res) => {
     }
   });
 });
-app.get('/data/user_id', (req, res) =>{
-  const sql = "SELECT User_id FROM Sensor_Data ORDER BY User_id"
+app.get('/data/tem', (req, res) =>{
+  const sql = "SELECT tem_data FROM Sensor_Data ORDER BY user_id"
   db.query(sql, (err, results) => {
     if(err) throw err;
     res.json(results);
   });
 });
-app.get('/data/tem-hum', (req, res) => {
-  const sql = "SELECT Tem_Hum_Data FROM Sensor_Data ORDER BY User_id";
+app.get('/data/tem', (req, res) => {
+  const sql = "SELECT hum_data FROM Sensor_Data ORDER BY user_id";
   db.query(sql, (err, results) => {
     if (err) throw err;
     res.json(results);
   });
 });
 app.get('/data/move', (req, res) => {
-  const sql = "SELECT Move_Data FROM Sensor_Data ORDER BY User_id";
+  const sql = "SELECT move_data FROM Sensor_Data ORDER BY user_id";
   db.query(sql, (err, results) => {
     if (err) throw err;
     res.json(results);
   });
 });
 app.get('/data/gas', (req, res) => {
-  const sql = "SELECT Gas_Data FROM Sensor_Data ORDER BY User_id";
+  const sql = "SELECT gas_data FROM Sensor_Data ORDER BY user_id";
   db.query(sql, (err, results) => {
     if (err) throw err;
     res.json(results);
