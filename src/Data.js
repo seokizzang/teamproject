@@ -1,39 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 function DataPage() {
-    const [user_id, setUser_id] = useState([]);
     const [temHumData, setTemHumData] = useState([]);
     const [moveData, setMoveData] = useState([]);
     const [gasData, setGasData] = useState([]);
 
-    //css
-    const cardStyle = {
-        border: '1px solid #ccc',
-        borderRadius: '8px',
-        padding: '16px',
-        width: '300px',
-        backgroundColor: '#f9f9f9',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    };
-    
-    const dataItemStyle = {
-        marginBottom: '12px',
-        borderBottom: '1px solid #eee',
-        paddingBottom: '8px',
-    };    
-
-
     useEffect(() => {
-        axios.get('http://3.35.112.81:3001/data/user_id')
-            .then((response) => setUser_id(response.data))
-            .catch((error) => console.error(error));
-
         axios.get('http://3.35.112.81:3001/data/tem')
-            .then((response) => setTemHumData(response.data))
-            .catch((error) => console.error(error));
-
-        axios.get('http://3.35.112.81:3001/data/hum')
             .then((response) => setTemHumData(response.data))
             .catch((error) => console.error(error));
 
@@ -46,52 +24,69 @@ function DataPage() {
             .catch((error) => console.error(error));
     }, []);
 
+    const temChartData = {
+        labels: temHumData.map((item) => `ID: ${item.user_id}`), 
+        datasets: [
+            {
+                label: 'Temperature',
+                data: temHumData.map((item) => item.tem_data),
+                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                fill: true,
+            },
+            {
+                label: 'Humidity',
+                data: temHumData.map((item) => item.hum_data),
+                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                fill: true,
+            },
+        ],
+    };
+
+    const moveChartData = {
+        labels: moveData.map((item) => `ID: ${item.user_id}`), 
+        datasets: [
+            {
+                label: 'Movement Data',
+                data: moveData.map((item) => item.move_data),
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: true,
+            },
+        ],
+    };
+
+    const gasChartData = {
+        labels: gasData.map((item) => `ID: ${item.user_id}`), 
+        datasets: [
+            {
+                label: 'Gas Detection',
+                data: gasData.map((item) => item.gas_data),
+                borderColor: 'rgba(255, 206, 86, 1)',
+                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                fill: true,
+            },
+        ],
+    };
+
     return (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-            {/* 온습도 데이터 카드 */}
-            <div style={cardStyle}>
-                <h2>온도 데이터</h2>
-                {temHumData.map((tem) => (
-                    <div key={tem.User_id} style={dataItemStyle}>
-                        <p><strong>번호:</strong> {tem.user_id}</p>
-                        <p><strong>온습도:</strong> {tem.tem_data}</p>
-                    </div>
-                ))}
+        <div style={{ padding: '20px' }}>
+            <h1>데이터 출력</h1>
+            <div style={{ marginBottom: '40px' }}>
+                <h2>온습도 데이터</h2>
+                <Line data={temChartData} />
             </div>
-            {/* 습도 데이터 카드 */}
-            <div style={cardStyle}>
-                <h2>습도 데이터</h2>
-                {temHumData.map((hum) => (
-                    <div key={hum.user_id} style={dataItemStyle}>
-                        <p><strong>번호:</strong> {hum.user_id}</p>
-                        <p><strong>온습도:</strong> {hum.hum_data}</p>
-                    </div>
-                ))}
+            <div style={{ marginBottom: '40px' }}>
+                <h2>인체감지 데이터</h2>
+                <Line data={moveChartData} />
             </div>
-            {/* 이동 데이터 카드 */}
-            <div style={cardStyle}>
-                <h2>이동 데이터</h2>
-                {moveData.map((move) => (
-                    <div key={move.user_id} style={dataItemStyle}>
-                        <p><strong>번호:</strong> {move.user_id}</p>
-                        <p><strong>인체감지:</strong> {move.move_data}</p>
-                    </div>
-                ))}
-            </div>
-    
-            {/* 가스 검출 데이터 카드 */}
-            <div style={cardStyle}>
-                <h2>가스 검출</h2>
-                {gasData.map((gas) => (
-                    <div key={gas.user_id} style={dataItemStyle}>
-                        <p><strong>번호:</strong> {gas.user_id}</p>
-                        <p><strong>가스:</strong> {gas.gas_data}</p>
-                    </div>
-                ))}
+            <div style={{ marginBottom: '40px' }}>
+                <h2>가스 검출 데이터</h2>
+                <Line data={gasChartData} />
             </div>
         </div>
     );
 }
-
 
 export default DataPage;
