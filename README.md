@@ -11,12 +11,12 @@
 
 ---
 ###ERD
-![image](https://github.com/user-attachments/assets/37832aa2-7107-4fc2-a66d-3f5f3b1cdec4)
-
 - 1:1 관계인 구조로 UserID를 PK로 이용하여 센서데이터를 수집한다.
+  
+![image](https://github.com/user-attachments/assets/37832aa2-7107-4fc2-a66d-3f5f3b1cdec4)
 
 ---
 ###Architecture
-![image](https://github.com/user-attachments/assets/31a61277-5b48-4e87-b40d-243e28ef2749)
-
 - 프로젝트 설계도
+- 
+![image](https://github.com/user-attachments/assets/31a61277-5b48-4e87-b40d-243e28ef2749)
