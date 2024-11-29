@@ -10,4 +10,13 @@
    - 사람의 움직임을 감지하여 독거노인의 활동 상태를 모니터링하며, 일정 시간 동안 움직임이 없으면 비상 경고를 발생시킵니다.
 
 ---
- **각자의 branch에서 작업후 통합 예정**
+###ERD
+![image](https://github.com/user-attachments/assets/37832aa2-7107-4fc2-a66d-3f5f3b1cdec4)
+
+- 1:1 관계인 구조로 UserID를 PK로 이용하여 센서데이터를 수집한다.
+
+---
+###Architecture
+![image](https://github.com/user-attachments/assets/31a61277-5b48-4e87-b40d-243e28ef2749)
+
+- 프로젝트 설계도
