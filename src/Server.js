@@ -7,10 +7,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 const db = mysql.createConnection({
-  host: '119.197.155.172',
-  user: 'zigbee_user',
-  password: '1234',
-  database: 'zigbee_db'
+  host: 'IP주소',
+  user: '유저ID',
+  password: '유저PW',
+  database: 'DB이름'
 });
 
 db.connect((err) => {
